@@ -31,17 +31,19 @@ const form = document.querySelector('#search-form')
 
 btnLoad.addEventListener('click', onClick);
 form.addEventListener('submit', onSubmit);
-input.addEventListener('keypress', onKeypress)
 
 function onSubmit(e) {
     e.preventDefault();
-}
-function onKeypress(e){
-  if (e.code === "Enter") {
-    e.preventDefault();
     onClick()
-  }
+    // form.addEventListener('keypress', onKeypress);
 }
+
+// function onKeypress(e) {
+// if (e.code === "Enter") {
+//       e.preventDefault();
+//       onClick()
+//     }
+// }
 
 function onClick(e) {
   pixiAPI(input.value, ++currentPage, parseData);
