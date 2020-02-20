@@ -54,13 +54,5 @@ function lightbox(e) {
     instance = basicLightbox.create(
       `<img class="open-img" src="${e.target.dataset.origin}" width="800" height="600">`)
     instance.show()
-    document.querySelector('.basicLightbox--img').addEventListener('click', onClose);
-  }
-}
-
-function onClose(e) {
-  console.log(e.target)
-  if (e.target.classList.contains('open-img')) {
-    instance.close();
   }
 }
