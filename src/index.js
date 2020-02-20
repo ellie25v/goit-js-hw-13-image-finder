@@ -35,15 +35,7 @@ form.addEventListener('submit', onSubmit);
 function onSubmit(e) {
     e.preventDefault();
     onClick()
-    // form.addEventListener('keypress', onKeypress);
 }
-
-// function onKeypress(e) {
-// if (e.code === "Enter") {
-//       e.preventDefault();
-//       onClick()
-//     }
-// }
 
 function onClick(e) {
   pixiAPI(input.value, ++currentPage, parseData);
