@@ -6,9 +6,8 @@ import './basicLightbox.css';
 
 
 function parseData(data) {
-  console.log(data);
   const result = templateImageCard(data);
-  document.querySelector('.gallery').innerHTML += result;
+  document.querySelector('.gallery').insertAdjacentHTML('beforeend', result);
   window.scrollTo({
     top: document.body.scrollHeight,
     behavior: "smooth"
@@ -28,12 +27,17 @@ class="input"
   placeholder="Search images..."/>
   </form>`);
 const input = document.querySelector('.input');
+const form = document.querySelector('#search-form')
 
 btnLoad.addEventListener('click', onClick);
-input.addEventListener('keypress', onKeyPress);
+form.addEventListener('submit', onSubmit);
+input.addEventListener('keypress', onKeypress)
 
-function onKeyPress(e){
-  if(e.code === "Enter"){
+function onSubmit(e) {
+    e.preventDefault();
+}
+function onKeypress(e){
+  if (e.code === "Enter") {
     e.preventDefault();
     onClick()
   }
@@ -43,12 +47,20 @@ function onClick(e) {
   pixiAPI(input.value, ++currentPage, parseData);
   section.addEventListener('click', lightbox);
 }
+let instance;
 
 function lightbox(e) {
-  console.log(e.target)
   if (e.target.classList.contains('img')) {
-    const instance = basicLightbox.create(
-      `<img src="${e.target.dataset.origin}" width="800" height="600">`)
+    instance = basicLightbox.create(
+      `<img class="open-img" src="${e.target.dataset.origin}" width="800" height="600">`)
     instance.show()
+    document.querySelector('.basicLightbox--img').addEventListener('click', onClose);
+  }
+}
+
+function onClose(e) {
+  console.log(e.target)
+  if (e.target.classList.contains('open-img')) {
+    instance.close();
   }
 }
